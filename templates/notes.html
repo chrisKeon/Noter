@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <title>Noterun</title>
+</head>
+<body>
+    <div class="title">
+        <h1>NOTE<span>RUN</span></h1>
+    </header>
+    {% if not context.id %}
+        <form action="/create" method="POST">
+    {%else %}
+        <form action="/update/{{context.id}}" method="post">
+    {% endif %}
+            <div class="noteCard">
+                <input type="text" name="title" value="{{context.title}}" />
+                <textarea id="note_content" name="note_content" rows="10" cols="50">
+                    {{context.content}}
+                </textarea>
+                <p> Created at {{context.created_at}}</p>
+                <button type="submit">Update</button>
+            </div>
+        </form>
+</body>
+</html>
